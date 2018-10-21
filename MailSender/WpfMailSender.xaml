@@ -1,0 +1,33 @@
+﻿<Window x:Class="MailSender.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MailSender"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="528">
+    <StackPanel>        
+        <StackPanel Orientation="Horizontal" Margin="50,50,50,20">
+            <StackPanel>
+                <TextBlock Text="Имя пользователя" Margin="30,0,0,0"/>
+                <TextBox Name="userTextBox" Width="170" />
+            </StackPanel>
+            <StackPanel Margin="50,0,0,0">
+                <TextBlock Text="Пароль" Margin="70,0,0,0"/>
+                <PasswordBox Name="passwordBox" Width="170"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel>
+            <TextBlock Text="Тема письма"
+                     HorizontalAlignment="Center" Margin="5"/>
+            <TextBox Name="subjectTextBox"
+                       HorizontalAlignment="Center"
+                       Width="250"/>
+            <TextBox Name="bodyTextBox"
+                     Margin="20,10"
+                     Height="170"/>
+            <Button Name="SendButton" 
+                HorizontalAlignment="Center" Content="Отправить"/>
+        </StackPanel>
+    </StackPanel>
+</Window>

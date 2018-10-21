@@ -1,0 +1,19 @@
+﻿<Window x:Class="MailSender.SendComplieteDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MailSender"
+        mc:Ignorable="d"
+        Title="SendComplieteDialog" Height="257" Width="514" 
+        ResizeMode="NoResize">
+    <Grid>
+        <Label Name="resLabel"
+               VerticalAlignment="Top"
+               HorizontalAlignment="Center"
+               Margin="0,70"
+               FontSize="20">
+        </Label>
+        <Button Content="Ok" Margin="225,0,208,50" VerticalAlignment="Bottom" Click="Button_Click"/>
+    </Grid>
+</Window>
