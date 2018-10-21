@@ -40,7 +40,7 @@ namespace MailSender
             mailService = new MailService();
             if(mailService.SendMessage(userTextBox.Text, passwordBox.SecurePassword, subjectTextBox.Text, bodyTextBox.Text))
             {
-                ShowResDialog("Почта отправлена");
+                ShowResDialog("Почта отправлена успешно");
             }
             else
             {
