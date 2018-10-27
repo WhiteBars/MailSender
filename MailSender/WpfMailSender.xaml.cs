@@ -26,7 +26,6 @@ namespace MailSender
         public MainWindow()
         {
             InitializeComponent();
-            SendButton.Click += SendButton_Click;
         }
 
         void ShowResDialog(string res)
@@ -35,17 +34,27 @@ namespace MailSender
             dialog.ShowDialog();
         }
 
-        private void SendButton_Click(object sender, RoutedEventArgs e)
+        private void OnExitClick(object sender, RoutedEventArgs e)
         {
-            mailService = new MailService();
-            if(mailService.SendMessage(userTextBox.Text, passwordBox.SecurePassword, subjectTextBox.Text, bodyTextBox.Text))
-            {
-                ShowResDialog("Почта отправлена успешно");
-            }
-            else
-            {
-                ShowResDialog("Ошибка при отправлении почты!");
-            }
+            Close();
         }
+
+        private void GoToPlannerButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            MainTabControl.SelectedItem = TimePlannerTab;
+        }
+
+        //private void SendButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    mailService = new MailService();
+        //    if(mailService.SendMessage(userTextBox.Text, passwordBox.SecurePassword, subjectTextBox.Text, bodyTextBox.Text))
+        //    {
+        //        ShowResDialog("Почта отправлена успешно");
+        //    }
+        //    else
+        //    {
+        //        ShowResDialog("Ошибка при отправлении почты!");
+        //    }
+        //}
     }
 }
