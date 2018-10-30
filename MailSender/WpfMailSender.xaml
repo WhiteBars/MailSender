@@ -38,7 +38,7 @@
                     </Grid.RowDefinitions>
                     <ToolBarTray Grid.Row="0">
                         <ToolBar>
-                            <view:CustomTabControl Text="TestText" ItemsSource="{x:Static spam:Senders.Items}">
+                            <view:CustomToolBarControl Text="Test" ItemsSource="{x:Static spam:Senders.Items}">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="OnAddButtonPressed">
                                         <i:InvokeCommandAction Command="{Binding TestCommand}"/>
@@ -50,7 +50,7 @@
                                         <i:InvokeCommandAction Command="{Binding TestCommand}"/>
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
-                            </view:CustomTabControl>
+                            </view:CustomToolBarControl>
                         </ToolBar>
                         <ToolBar>
                             <TextBlock Text="Отправители" 

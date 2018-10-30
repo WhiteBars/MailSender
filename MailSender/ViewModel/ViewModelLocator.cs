@@ -16,9 +16,6 @@ namespace MailSender.ViewModel
         public WpfMailSenderViewModel WpfMailSender =>
             ServiceLocator.Current.GetInstance<WpfMailSenderViewModel>();
 
-        public CustomToolBarControlViewModel CustomToolBar =>
-            ServiceLocator.Current.GetInstance<CustomToolBarControlViewModel>();
-
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
@@ -38,7 +35,6 @@ namespace MailSender.ViewModel
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<WpfMailSenderViewModel>();
-            SimpleIoc.Default.Register<CustomToolBarControlViewModel>();
         }
 
         public static void Cleanup()

@@ -125,7 +125,6 @@
     <Compile Include="SendComplieteDialog.xaml.cs">
       <DependentUpon>SendComplieteDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\CustomToolBarControlViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="ViewModel\WpfMailSenderViewModel.cs" />
