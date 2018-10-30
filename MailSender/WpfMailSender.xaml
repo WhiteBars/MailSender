@@ -6,8 +6,12 @@
         xmlns:local="clr-namespace:MailSender"
         xmlns:spam="clr-namespace:MailSenderLib;assembly=MailSenderLib"
         xmlns:a="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:view="clr-namespace:MailSender.View"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
-        Title="Рассыльщик" Height="450" Width="700">
+        DataContext="{Binding WpfMailSender, Source={StaticResource Locator}}"
+        Title="{Binding Title}" Height="450" Width="700" MinHeight="200" MinWidth="300">
     <DockPanel>
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
             <Menu DockPanel.Dock="Top">
@@ -34,6 +38,21 @@
                     </Grid.RowDefinitions>
                     <ToolBarTray Grid.Row="0">
                         <ToolBar>
+                            <view:CustomTabControl Text="TestText" ItemsSource="{x:Static spam:Senders.Items}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="OnAddButtonPressed">
+                                        <i:InvokeCommandAction Command="{Binding TestCommand}"/>
+                                    </i:EventTrigger>
+                                    <i:EventTrigger EventName="OnDeleteButtonPressed">
+                                        <i:InvokeCommandAction Command="{Binding TestCommand}"/>
+                                    </i:EventTrigger>
+                                    <i:EventTrigger EventName="OnEditButtonPressed">
+                                        <i:InvokeCommandAction Command="{Binding TestCommand}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </view:CustomTabControl>
+                        </ToolBar>
+                        <ToolBar>
                             <TextBlock Text="Отправители" 
                                        VerticalAlignment="Center" 
                                        Margin="0,0,3,0"/>
@@ -50,15 +69,14 @@
                             </ComboBox>
                             <Button ToolTip="Добавить отправителя">
                                 <StackPanel Orientation="Horizontal">
-                                    <Image Source="media/add.png" Height="16"/>
-                                    <TextBlock Text="Добавить"/>
+                                    <fa:ImageAwesome Icon="PlusCircle" Foreground="LimeGreen" Height="16"/>
                                 </StackPanel>
                             </Button>
                             <Button ToolTip="Удалить отправителя">
-                                <Image Height="16" Source="media/remove.png"/>
+                                <fa:ImageAwesome Icon="MinusCircle" Foreground="IndianRed" Height="16"/>
                             </Button>
                             <Button ToolTip="Редактировать">
-                                <Image Height="16" Source="media/edit.png"/>
+                                <fa:ImageAwesome Icon="Edit" Height="16"/>
                             </Button>
                         </ToolBar>
                         <ToolBar Band="1" BandIndex="0">
@@ -76,48 +94,43 @@
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
-                            <Button ToolTip="Добавить">
+                            <Button ToolTip="Добавить отправителя">
                                 <StackPanel Orientation="Horizontal">
-                                    <Image Source="media/add.png" Height="16"/>
-                                    <TextBlock Text="Добавить"/>
+                                    <fa:ImageAwesome Icon="PlusCircle" Foreground="LimeGreen" Height="16"/>
                                 </StackPanel>
                             </Button>
                             <Button ToolTip="Удалить отправителя">
-                                <Image Height="16" Source="media/remove.png"/>
+                                <fa:ImageAwesome Icon="MinusCircle" Foreground="IndianRed" Height="16"/>
                             </Button>
                             <Button ToolTip="Редактировать">
-                                <Image Height="16" Source="media/edit.png"/>
+                                <fa:ImageAwesome Icon="Edit" Height="16"/>
                             </Button>
                         </ToolBar>
                         <ToolBar Band="0" BandIndex="1">
                             <Button Click="GoToPlannerButton_OnClick">
                                 <StackPanel Orientation="Horizontal">
-                                    <Image Height="16" Source="media/clock.png"/>
+                                    <fa:ImageAwesome Icon="ClockOutline" Height="16"/>
                                     <TextBlock Text="Перейти в планировщик"/>
                                 </StackPanel>
                             </Button>
                         </ToolBar>
                         <ToolBar Band="1">
                             <TextBlock VerticalAlignment="Center" Text="Список адресов"/>
-                            <Button ToolTip="Добавить">
+                            <Button ToolTip="Добавить отправителя">
                                 <StackPanel Orientation="Horizontal">
-                                    <Image Source="media/add.png" Height="16"/>
-                                    <TextBlock Text="Добавить"/>
+                                    <fa:ImageAwesome Icon="PlusCircle" Foreground="LimeGreen" Height="16"/>
                                 </StackPanel>
                             </Button>
-                            <Button ToolTip="Удалить">
-                                <Image Height="16" Source="media/remove.png"/>
+                            <Button ToolTip="Удалить отправителя">
+                                <fa:ImageAwesome Icon="MinusCircle" Foreground="IndianRed" Height="16"/>
                             </Button>
                             <Button ToolTip="Редактировать">
-                                <Image Height="16" Source="media/edit.png"/>
+                                <fa:ImageAwesome Icon="Edit" Height="16"/>
                             </Button>
                         </ToolBar>
                     </ToolBarTray>
                     <GroupBox Grid.Row="1" Header="Группы">
-                        <GroupBox.Resources>
-                            <spam:DataBase x:Key="DataBaseObject"/>
-                        </GroupBox.Resources>
-                        <DataGrid ItemsSource="{Binding Recipients, Source={StaticResource DataBaseObject}}" 
+                        <!--<DataGrid ItemsSource="{Binding Recipients}" 
                                   AutoGenerateColumns="False"
                                   HorizontalGridLinesBrush="{x:Null}"
                                   AlternatingRowBackground="LightBlue"
@@ -128,7 +141,8 @@
                                 <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
                                 <DataGridTextColumn Header="Comment" Binding="{Binding Comment}" Width="*"/>
                             </DataGrid.Columns>
-                        </DataGrid>
+                        </DataGrid>-->
+                        <view:RecipientsView/>
                     </GroupBox>
                 </Grid>
             </TabItem>
@@ -155,14 +169,6 @@
                 <Grid>
                     <RichTextBox/>
                 </Grid>
-            </TabItem>
-            <TabItem IsEnabled="False">
-                <TabItem.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <CheckBox Content="133" VerticalContentAlignment="Center"/>
-                        <TextBlock Text="Статистика" Margin="5,0,0,0"/>
-                    </StackPanel>
-                </TabItem.Header>
             </TabItem>
         </TabControl>
     </DockPanel>
